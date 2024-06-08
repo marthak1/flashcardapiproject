@@ -1,6 +1,7 @@
 package com.cbfacademy.flashcardapiproject.flashcard;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -9,10 +10,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(path = "/api/flashcards")
@@ -26,43 +28,50 @@ public class FlashcardController {
 
     @PostMapping
     public ResponseEntity<Flashcard> createFlashcard(@RequestBody Flashcard flashcard) {
-        Flashcard createdFlashcard = flashcardService.createFlashcard(flashcard);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdFlashcard);
+        try {
+            Flashcard createdFlashcard = flashcardService.createFlashcard(flashcard);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdFlashcard);
+        } catch (RuntimeException exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);
+        }
+
     }
 
     @GetMapping
-    public ResponseEntity<List<Flashcard>> getAllFlashcards() {
-        List<Flashcard> flashcards = flashcardService.getAllFlashcards();
-        return ResponseEntity.ok(flashcards);
+    public List<Flashcard> getAllFlashcards() {
+        try {
+            return flashcardService.getAllFlashcards();
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.OK, e.getMessage(), e);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Flashcard> getFlashcardById(@PathVariable Long id) throws NotFoundException {
-        Flashcard flashcard = flashcardService.getFlashcardById(id);
-        if (flashcard != null) {
-            return ResponseEntity.ok(flashcard);
-        } else {
-            return ResponseEntity.notFound().build();
+    public Flashcard getFlashcardById(@PathVariable Long id) {
+        try {
+            return flashcardService.getFlashcardById(id);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "FlashCard Not Found", e);
         }
+
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Flashcard> updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
-        Flashcard flashcard = flashcardService.updateFlashcard(id, updatedFlashcard);
-        if (flashcard != null) {
-            return ResponseEntity.ok(flashcard);
-        } else {
-            return ResponseEntity.notFound().build();
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public Flashcard updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
+        try {
+            return flashcardService.updateFlashcard(id, updatedFlashcard);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flashcard Not Found", e);
         }
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFlashcard(@PathVariable Long id) {
-        boolean deleted = flashcardService.deleteFlashcard(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+    public void deleteFlashcard(@PathVariable Long id) {
+        try {
+            flashcardService.deleteFlashcard(id);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
 }

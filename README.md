@@ -1,9 +1,8 @@
 The purpose of this project is to build a (JSON over HTTP) API to manage flashcards, following a Behavioural-driven development approach.
 
-
 BDD requirement:
 Title:
-Basic functionality to create , edit, delete and retrieve flashcards. 
+Basic functionality to create , edit, delete and retrieve flashcards.
 Each flashcard will have a unique identifier (ID).
 
 ###Creating FlashCards
@@ -20,8 +19,7 @@ when: they enter a question and its corresponding answer,
 then: the flash card is saved sucessfully
 And the flashcard has a unique identifier (ID).
 
-
-###Updating  FlashCards####
+###Updating FlashCards####
 Narrative:
 Scenario: As a user, I want to update the content of a flashcard so that I can correct errors or improve its accuracy.
 
@@ -42,10 +40,7 @@ Saving Changes:
 After making updates, I can save the modified flashcard.
 The changes are reflected in the flashcard list.
 
-
-
-
-###Retrieving  FlashCards###
+###Retrieving FlashCards###
 Narrative:
 Scenario: As a user, I want to retrieve a specific flashcard so that I can review its content .
 
@@ -69,14 +64,11 @@ Given an unexpected error occurs during retrieval (e.g., database connection iss
 Then the app displays a generic error message (e.g., “An error occurred. Please try again later.”).
 And logs the error for debugging purposes.
 
-
-
-###Deleting  FlashCards###
+###Deleting FlashCards###
 Narrative:
 Scenario: As a user, I want to be able to delete a flashcard that is no longer needed.
 
-Use Case: The user opens the app, clicks “Delete Flashcard,” enters the ID, confirms deletion and  the flashcard permantely deleted.
-
+Use Case: The user opens the app, clicks “Delete Flashcard,” enters the ID, confirms deletion and the flashcard permantely deleted.
 
 Acceptance criteria:
 Accessing Flashcards: I can navigate to my list of flashcards within the app.
@@ -100,8 +92,6 @@ Given an unexpected error occurs during deletion (e.g., database connection issu
 Then the app displays a generic error message (e.g., “An error occurred. Please try again later.”).
 And logs the error for debugging purposes.
 
- 
-
 ####REST Endpoints:###
 Create a REST controller with endpoints for CRUD operations:
 GET /flashcards: Retrieve all flashcards.
@@ -111,7 +101,7 @@ PUT /flashcards/{id}: Update an existing flashcard.
 DELETE /flashcards/{id}: Delete a flashcard.
 
 ###TEST###
-Unit Testing The Controller Class
+Unit Testing The Service Methods
 
 Test Methods:
 Write test methods to cover different scenarios:
@@ -119,9 +109,3 @@ Test flashcard creation (HTTP POST request).
 Test flashcard retrieval (HTTP GET request).
 Test flashcard update (HTTP PUT request).
 Test error handling (e.g., invalid input, non-existent flashcard ID)
-
-
-
- 
-
-

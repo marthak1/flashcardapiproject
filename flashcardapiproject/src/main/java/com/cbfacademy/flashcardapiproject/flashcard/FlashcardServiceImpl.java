@@ -1,6 +1,7 @@
 package com.cbfacademy.flashcardapiproject.flashcard;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,7 @@ public class FlashcardServiceImpl implements FlashcardService {
 
     @Override
     public List<Flashcard> getAllFlashcards() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllFlashcards'");
+        return flashcardRepository.findAll();
     }
 
     @Override
@@ -32,15 +32,22 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateFlashcard'");
+    public Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard) throws NoSuchElementException {
+        try {
+            Flashcard newFlashcard = flashcardRepository.findById(id).orElseThrow();
+            newFlashcard.setQuestion(updatedFlashcard.getQuestion());
+            newFlashcard.setAnswer(updatedFlashcard.getAnswer());
+            return flashcardRepository.save(newFlashcard);
+
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException();
+        }
+
     }
 
     @Override
-    public boolean deleteFlashcard(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteFlashcard'");
+    public void deleteFlashcard(Long id) {
+        flashcardRepository.deleteById(id);
     }
 
     // Other methods (getAllFlashcards, getFlashcardById, updateFlashcard,

@@ -13,5 +13,5 @@ public interface FlashcardService {
 
     Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard);
 
-    boolean deleteFlashcard(Long id);
+    void deleteFlashcard(Long id);
 }
