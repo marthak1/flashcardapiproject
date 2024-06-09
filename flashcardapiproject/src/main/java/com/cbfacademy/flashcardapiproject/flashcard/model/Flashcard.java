@@ -1,29 +1,26 @@
-package com.cbfacademy.flashcardapiproject.flashcard;
+package com.cbfacademy.flashcardapiproject.flashcard.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
-@Table(name = "flashcards")
-public class Flashcard {
+@MappedSuperclass
+public abstract class Flashcard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String question;
     private String answer;
 
-    // Getters, setters, constructors
-    public Long getId() {
-        return id;
-    }
-
     public Flashcard(Long id, String question, String answer) {
         this.id = id;
         this.question = question;
         this.answer = answer;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -45,4 +42,5 @@ public class Flashcard {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
 }

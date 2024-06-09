@@ -1,4 +1,4 @@
-package com.cbfacademy;
+package com.cbfacademy.flashcardapiproject;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,14 +9,12 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.ResponseEntity;
 
-import com.cbfacademy.flashcardapiproject.flashcard.FlashcardController;
-
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(classes = FlashcardController.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class AppTests {
+@SpringBootTest
+class FlashcardControllerTest {
 
 	@LocalServerPort
 	private int port;
