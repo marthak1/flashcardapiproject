@@ -3,6 +3,7 @@ package com.cbfacademy.flashcardapiproject.flashcard.service;
 import java.util.List;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
+import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
 //import com.cbfacademy.flashcardapiproject.flashcard.model.ImageFlashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
 
@@ -15,7 +16,7 @@ public interface FlashcardService {
 
     TextFlashcard getTextFlashcardByid(Long id) throws NotFoundException;
 
-    TextFlashcard updateTextFlashcard(Long id, TextFlashcard updatedTextFlashcard);
+    TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard);
 
     void deleteTextFlashcard(Long id);
 

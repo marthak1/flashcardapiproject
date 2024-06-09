@@ -7,6 +7,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.repository.ImageFlashcardRepository;
 import com.cbfacademy.flashcardapiproject.flashcard.repository.TextFlashcardRepository;
@@ -48,8 +49,12 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public TextFlashcard updateTextFlashcard(Long id, TextFlashcard updatedTextFlashcard)
-            throws NoSuchElementException {
+    public void deleteTextFlashcard(Long id) {
+        textFlashcardRepository.deleteById(id);
+    }
+
+    @Override
+    public TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) {
         try {
             TextFlashcard newTextFlashcard = textFlashcardRepository.findById(id).orElseThrow();
             newTextFlashcard.setQuestion(updatedTextFlashcard.getQuestion());
@@ -60,12 +65,6 @@ public class FlashcardServiceImpl implements FlashcardService {
             throw new NoSuchElementException();
         }
     }
-
-    @Override
-    public void deleteTextFlashcard(Long id) {
-        textFlashcardRepository.deleteById(id);
-    }
-
 }
 
 /*
