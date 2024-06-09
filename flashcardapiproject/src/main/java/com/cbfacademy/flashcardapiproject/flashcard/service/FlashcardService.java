@@ -1,6 +1,8 @@
 package com.cbfacademy.flashcardapiproject.flashcard.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
@@ -10,13 +12,13 @@ import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
 public interface FlashcardService {
 
     // TextFlashcard HTTP
-    TextFlashcard createTextFlashcard(String question, String answer);
+    TextFlashcard createTextFlashcard(TextFlashcard createdTextFlashcard);
 
     List<TextFlashcard> getAllTextFlashcards();
 
     TextFlashcard getTextFlashcardByid(Long id) throws NotFoundException;
 
-    TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard);
+    TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) throws NoSuchElementException;
 
     void deleteTextFlashcard(Long id);
 

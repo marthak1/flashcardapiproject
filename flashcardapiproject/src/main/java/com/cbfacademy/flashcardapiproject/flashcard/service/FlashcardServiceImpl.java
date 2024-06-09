@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
@@ -24,13 +25,10 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public TextFlashcard createTextFlashcard(String question, String answer)
+    public TextFlashcard createTextFlashcard(TextFlashcard createdTextFlashcard)
             throws IllegalArgumentException, OptimisticLockingFailureException {
         try {
-            TextFlashcard textFlashcard = new TextFlashcard(null, question, answer);
-            textFlashcard.setQuestion(question);
-            textFlashcard.setAnswer(answer);
-            return textFlashcardRepository.save(textFlashcard);
+            return textFlashcardRepository.save(createdTextFlashcard);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
@@ -54,12 +52,13 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) {
+    @PutMapping
+    public TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) throws NoSuchElementException {
         try {
             TextFlashcard newTextFlashcard = textFlashcardRepository.findById(id).orElseThrow();
             newTextFlashcard.setQuestion(updatedTextFlashcard.getQuestion());
             newTextFlashcard.setAnswer(updatedTextFlashcard.getAnswer());
-            return textFlashcardRepository.save(updatedTextFlashcard);
+            return textFlashcardRepository.save(updateTextFlashcard(id, updatedTextFlashcard));
 
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException();

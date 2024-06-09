@@ -30,11 +30,10 @@ public class TextFlashcardController {
     }
 
     @PostMapping
-    public ResponseEntity<TextFlashcard> createTextFlashcard(@RequestBody TextFlashcard request) {
+    public ResponseEntity<TextFlashcard> createTextFlashcard(@RequestBody TextFlashcard createdTextFlashcard) {
         try {
-            TextFlashcard textFlashcard = textflashcardService.createTextFlashcard(request.getQuestion(),
-                    request.getAnswer());
-            return ResponseEntity.status(HttpStatus.CREATED).body(textFlashcard);
+            TextFlashcard newTextFlashcard = textflashcardService.createTextFlashcard(createdTextFlashcard);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newTextFlashcard);
         } catch (RuntimeException exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);
         }
