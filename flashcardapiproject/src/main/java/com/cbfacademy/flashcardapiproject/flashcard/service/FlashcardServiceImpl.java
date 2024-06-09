@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
@@ -52,7 +51,7 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    @PutMapping
+
     public TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) throws NoSuchElementException {
         try {
             TextFlashcard newTextFlashcard = textFlashcardRepository.findById(id).orElseThrow();
