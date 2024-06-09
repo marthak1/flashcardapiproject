@@ -19,6 +19,10 @@ public abstract class Flashcard {
         this.answer = answer;
     }
 
+    public Flashcard() {
+
+    }
+
     public Long getId() {
         return id;
     }

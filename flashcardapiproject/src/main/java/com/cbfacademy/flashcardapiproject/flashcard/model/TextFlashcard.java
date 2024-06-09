@@ -12,4 +12,8 @@ public class TextFlashcard extends Flashcard {
 
     }
 
+    public TextFlashcard() {
+
+    }
+
 }
