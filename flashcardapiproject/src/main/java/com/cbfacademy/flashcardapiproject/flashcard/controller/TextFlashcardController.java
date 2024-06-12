@@ -60,11 +60,11 @@ public class TextFlashcardController {
     }
 
     @PutMapping("/{id}")
-    public TextFlashcard updateFlashcard(@PathVariable Long id, @RequestBody TextFlashcard updatedTextFlashcard) {
+    public TextFlashcard updateTextFlashcard(@PathVariable Long id, @RequestBody TextFlashcard updatedTextFlashcard) {
         try {
             return textflashcardService.updateTextFlashcard(id, updatedTextFlashcard);
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flashcard Not Found", e);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Flashcard Not Found", e);
         }
 
     }

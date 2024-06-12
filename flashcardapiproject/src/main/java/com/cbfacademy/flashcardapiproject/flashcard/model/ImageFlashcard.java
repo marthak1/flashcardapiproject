@@ -21,4 +21,7 @@ public class ImageFlashcard extends Flashcard {
         this.imageUrl = imageUrl;
     }
 
+    public ImageFlashcard() {
+
+    }
 }

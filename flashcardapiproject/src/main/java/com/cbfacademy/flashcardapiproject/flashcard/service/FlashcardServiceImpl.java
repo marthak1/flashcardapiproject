@@ -15,7 +15,7 @@ import com.cbfacademy.flashcardapiproject.flashcard.repository.TextFlashcardRepo
 @Service
 public class FlashcardServiceImpl implements FlashcardService {
     // private final ImageFlashcardRepository imageFlashcardRepository;
-    private final TextFlashcardRepository textFlashcardRepository;
+    private TextFlashcardRepository textFlashcardRepository;
 
     public FlashcardServiceImpl(ImageFlashcardRepository imageflashcardRepository,
             TextFlashcardRepository textFlashcardRepository) {
@@ -51,15 +51,15 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-
     public TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) throws NoSuchElementException {
         try {
             TextFlashcard newTextFlashcard = textFlashcardRepository.findById(id).orElseThrow();
             newTextFlashcard.setQuestion(updatedTextFlashcard.getQuestion());
             newTextFlashcard.setAnswer(updatedTextFlashcard.getAnswer());
-            return textFlashcardRepository.save(updateTextFlashcard(id, updatedTextFlashcard));
+            return textFlashcardRepository.save(newTextFlashcard);
 
         } catch (NoSuchElementException e) {
+
             throw new NoSuchElementException();
         }
     }
@@ -80,34 +80,26 @@ public class FlashcardServiceImpl implements FlashcardService {
  * 
  * @Override
  * public List<ImageFlashcard> getAllImageFlashcards() {
- * // TODO Auto-generated method stub
- * throw new
- * UnsupportedOperationException("Unimplemented method 'getAllImageFlashcards'"
+ * 
  * );
  * }
  * 
  * @Override
  * public ImageFlashcard getImageFlashcardById(Long id) throws NotFoundException
  * {
- * // TODO Auto-generated method stub
- * throw new
- * UnsupportedOperationException("Unimplemented method 'getImageFlashcardById'"
+ * 
  * );
  * }
  * 
  * @Override
  * public ImageFlashcard updateImageFlashcard(Long id, ImageFlashcard
  * updatedImageFlashcard) {
- * // TODO Auto-generated method stub
- * throw new
- * UnsupportedOperationException("Unimplemented method 'updateImageFlashcard'");
+ *
  * }
  * 
  * @Override
  * public void deleteImageFlashcard(Long id) {
- * // TODO Auto-generated method stub
- * throw new
- * UnsupportedOperationException("Unimplemented method 'deleteImageFlashcard'");
+ * 
  * }
  * 
  * // Other methods (getAllFlashcards, getFlashcardById, updateFlashcard,

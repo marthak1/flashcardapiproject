@@ -9,7 +9,7 @@ Each flashcard will have a unique identifier (ID).
 Narrative:
 Scenario: As a user, I want to create new flashcards by entering a question and its corresponding answer.
 
-Use Case: The user opens the app, clicks “Create New Flashcard,” enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”), and saves the flashcard.
+Use Case: (through a client of this web API)enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”), and saves the flashcard.
 
 Acceptance criteria:
 Given: a user wants to create a new flashcard
@@ -23,7 +23,7 @@ And the flashcard has a unique identifier (ID).
 Narrative:
 Scenario: As a user, I want to update the content of a flashcard so that I can correct errors or improve its accuracy.
 
-Use Case: The user opens the app, clicks “Update Flashcard,” enters the new question (“Word or Phrase”) and its coresponding new answer (“Definition or Translation”), and saves the flashcard.
+Use Case: (through a client of this web API) enters the new question (“Word or Phrase”) and its coresponding new answer (“Definition or Translation”), and saves the flashcard.
 
 Acceptance Criteria:
 Accessing Flashcards:
@@ -44,7 +44,7 @@ The changes are reflected in the flashcard list.
 Narrative:
 Scenario: As a user, I want to retrieve a specific flashcard so that I can review its content .
 
-Use Case: The user opens the app, clicks “View Flashcard” enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”),.
+Use Case: (through a client of this web API) enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”),.
 
 Acceptance criteria:
 Accessing Flashcards: I can navigate to the list of flashcards within the app.
@@ -68,7 +68,7 @@ And logs the error for debugging purposes.
 Narrative:
 Scenario: As a user, I want to be able to delete a flashcard that is no longer needed.
 
-Use Case: The user opens the app, clicks “Delete Flashcard,” enters the ID, confirms deletion and the flashcard permantely deleted.
+Use Case: (through a client of this web API) enters the ID, confirms deletion and the flashcard permantely deleted.
 
 Acceptance criteria:
 Accessing Flashcards: I can navigate to my list of flashcards within the app.
