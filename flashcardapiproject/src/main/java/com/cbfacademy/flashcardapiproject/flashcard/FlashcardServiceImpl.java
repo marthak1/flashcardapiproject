@@ -1,4 +1,4 @@
-package com.cbfacademy.flashcardapiproject.flashcard.service;
+package com.cbfacademy.flashcardapiproject.flashcard;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -7,27 +7,21 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
-import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
-import com.cbfacademy.flashcardapiproject.flashcard.repository.ImageFlashcardRepository;
-import com.cbfacademy.flashcardapiproject.flashcard.repository.TextFlashcardRepository;
-
 @Service
 public class FlashcardServiceImpl implements FlashcardService {
-    // private final ImageFlashcardRepository imageFlashcardRepository;
-    private TextFlashcardRepository textFlashcardRepository;
 
-    public FlashcardServiceImpl(ImageFlashcardRepository imageflashcardRepository,
-            TextFlashcardRepository textFlashcardRepository) {
-        // this.imageFlashcardRepository = imageflashcardRepository;
-        this.textFlashcardRepository = textFlashcardRepository;
+    private FlashcardRepository flashcardRepository;
+
+    public FlashcardServiceImpl(FlashcardRepository flashcardRepository) {
+
+        this.flashcardRepository = flashcardRepository;
     }
 
     @Override
-    public TextFlashcard createTextFlashcard(TextFlashcard createdTextFlashcard)
+    public Flashcard createFlashcard(Flashcard createdFlashcard)
             throws IllegalArgumentException, OptimisticLockingFailureException {
         try {
-            return textFlashcardRepository.save(createdTextFlashcard);
+            return flashcardRepository.save(createdFlashcard);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
@@ -35,28 +29,28 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public List<TextFlashcard> getAllTextFlashcards() {
-        return textFlashcardRepository.findAll();
+    public List<Flashcard> getAllFlashcards() {
+        return flashcardRepository.findAll();
     }
 
     @Override
-    public TextFlashcard getTextFlashcardByid(Long id) throws NotFoundException {
-        return textFlashcardRepository.findById(id)
+    public Flashcard getFlashcardByid(Long id) throws NotFoundException {
+        return flashcardRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException());
     }
 
     @Override
-    public void deleteTextFlashcard(Long id) {
-        textFlashcardRepository.deleteById(id);
+    public void deleteFlashcard(Long id) {
+        flashcardRepository.deleteById(id);
     }
 
     @Override
-    public TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) throws NoSuchElementException {
+    public Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard) throws NoSuchElementException {
         try {
-            TextFlashcard newTextFlashcard = textFlashcardRepository.findById(id).orElseThrow();
-            newTextFlashcard.setQuestion(updatedTextFlashcard.getQuestion());
-            newTextFlashcard.setAnswer(updatedTextFlashcard.getAnswer());
-            return textFlashcardRepository.save(newTextFlashcard);
+            Flashcard newFlashcard = flashcardRepository.findById(id).orElseThrow();
+            newFlashcard.setQuestion(updatedFlashcard.getQuestion());
+            newFlashcard.setAnswer(updatedFlashcard.getAnswer());
+            return flashcardRepository.save(newFlashcard);
 
         } catch (NoSuchElementException e) {
 

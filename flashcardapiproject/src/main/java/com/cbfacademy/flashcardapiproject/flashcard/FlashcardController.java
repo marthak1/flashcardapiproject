@@ -1,4 +1,4 @@
-package com.cbfacademy.flashcardapiproject.flashcard.controller;
+package com.cbfacademy.flashcardapiproject.flashcard;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,42 +17,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
-import com.cbfacademy.flashcardapiproject.flashcard.service.FlashcardService;
-
 @RestController
-@RequestMapping(path = "/api/text_flashcard")
-public class TextFlashcardController {
+@RequestMapping(path = "/api/flashcards")
+public class FlashcardController {
 
-    private final FlashcardService textflashcardService;
+    private final FlashcardService flashcardService;
 
-    public TextFlashcardController(FlashcardService textflashcardService) {
-        this.textflashcardService = textflashcardService;
+    public FlashcardController(FlashcardService flashcardService) {
+        this.flashcardService = flashcardService;
     }
 
     @PostMapping
-    public ResponseEntity<TextFlashcard> createTextFlashcard(@RequestBody TextFlashcard createdTextFlashcard) {
+    public ResponseEntity<Flashcard> createFlashcard(@RequestBody Flashcard createdFlashcard) {
         try {
-            TextFlashcard newTextFlashcard = textflashcardService.createTextFlashcard(createdTextFlashcard);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newTextFlashcard);
+            Flashcard newFlashcard = flashcardService.createFlashcard(createdFlashcard);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newFlashcard);
         } catch (RuntimeException exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);
         }
     }
 
     @GetMapping
-    public List<TextFlashcard> getAllTextFlashcards() {
+    public List<Flashcard> getAllFlashcards() {
         try {
-            return textflashcardService.getAllTextFlashcards();
+            return flashcardService.getAllFlashcards();
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.OK, e.getMessage(), e);
         }
     }
 
     @GetMapping("/{id}")
-    public TextFlashcard getTextFlashcardByid(@PathVariable Long id) {
+    public Flashcard getFlashcardByid(@PathVariable Long id) {
         try {
-            return textflashcardService.getTextFlashcardByid(id);
+            return flashcardService.getFlashcardByid(id);
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "FlashCard Not Found", e);
         }
@@ -60,9 +57,9 @@ public class TextFlashcardController {
     }
 
     @PutMapping("/{id}")
-    public TextFlashcard updateTextFlashcard(@PathVariable Long id, @RequestBody TextFlashcard updatedTextFlashcard) {
+    public Flashcard updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
         try {
-            return textflashcardService.updateTextFlashcard(id, updatedTextFlashcard);
+            return flashcardService.updateFlashcard(id, updatedFlashcard);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Flashcard Not Found", e);
         }
@@ -72,7 +69,7 @@ public class TextFlashcardController {
     @DeleteMapping("/{id}")
     public void deleteFlashcard(@PathVariable Long id) {
         try {
-            textflashcardService.deleteTextFlashcard(id);
+            flashcardService.deleteFlashcard(id);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }

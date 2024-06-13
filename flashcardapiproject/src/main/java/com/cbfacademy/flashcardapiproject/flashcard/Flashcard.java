@@ -1,12 +1,14 @@
-package com.cbfacademy.flashcardapiproject.flashcard.model;
+package com.cbfacademy.flashcardapiproject.flashcard;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Table;
 
-@MappedSuperclass
-public abstract class Flashcard {
+@Entity
+@Table(name = "flashcards")
+public class Flashcard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

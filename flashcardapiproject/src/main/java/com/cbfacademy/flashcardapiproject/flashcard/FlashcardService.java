@@ -1,26 +1,22 @@
-package com.cbfacademy.flashcardapiproject.flashcard.service;
+package com.cbfacademy.flashcardapiproject.flashcard;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
-import com.cbfacademy.flashcardapiproject.flashcard.model.Flashcard;
-//import com.cbfacademy.flashcardapiproject.flashcard.model.ImageFlashcard;
-import com.cbfacademy.flashcardapiproject.flashcard.model.TextFlashcard;
-
 public interface FlashcardService {
 
     // TextFlashcard HTTP
-    TextFlashcard createTextFlashcard(TextFlashcard createdTextFlashcard);
+    Flashcard createFlashcard(Flashcard createdFlashcard);
 
-    List<TextFlashcard> getAllTextFlashcards();
+    List<Flashcard> getAllFlashcards();
 
-    TextFlashcard getTextFlashcardByid(Long id) throws NotFoundException;
+    Flashcard getFlashcardByid(Long id) throws NotFoundException;
 
-    TextFlashcard updateTextFlashcard(Long id, Flashcard updatedTextFlashcard) throws NoSuchElementException;
+    Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard) throws NoSuchElementException;
 
-    void deleteTextFlashcard(Long id);
+    void deleteFlashcard(Long id);
 
     /*
      * *ImageFlashCard HTTPS
