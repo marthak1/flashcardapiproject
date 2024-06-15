@@ -12,7 +12,7 @@ public interface FlashcardService {
 
     List<Flashcard> getAllFlashcards();
 
-    Flashcard getFlashcardByid(Long id) throws NotFoundException;
+    Flashcard getFlashcardById(Long id) throws NotFoundException;
 
     Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard) throws NoSuchElementException;
 

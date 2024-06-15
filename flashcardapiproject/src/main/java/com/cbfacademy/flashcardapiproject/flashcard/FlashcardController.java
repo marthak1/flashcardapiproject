@@ -49,7 +49,7 @@ public class FlashcardController {
     @GetMapping("/{id}")
     public Flashcard getFlashcardByid(@PathVariable Long id) {
         try {
-            return flashcardService.getFlashcardByid(id);
+            return flashcardService.getFlashcardById(id);
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "FlashCard Not Found", e);
         }

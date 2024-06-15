@@ -34,7 +34,7 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public Flashcard getFlashcardByid(Long id) throws NotFoundException {
+    public Flashcard getFlashcardById(Long id) throws NotFoundException {
         return flashcardRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException());
     }
