@@ -3,9 +3,13 @@ The purpose of this project is to build a (JSON over HTTP) API to manage flashca
 BDD requirement:
 Title:
 Basic functionality to create , edit, delete and retrieve flashcards.
-Each flashcard will have a unique identifier (ID).
+Each flashcard will have;
+- a unique identifier (ID).
+-a question
+-and a corresponding answer
 
-###Creating FlashCards
+
+###Creating The  FlashCard
 Narrative:
 Scenario: As a user, I want to create new flashcards by entering a question and its corresponding answer.
 
@@ -17,13 +21,29 @@ Given: a user wants to create a new flashcard
 when: they enter a question and its corresponding answer,
 
 then: the flash card is saved sucessfully
-And the flashcard has a unique identifier (ID).
+And the flashcard is assigned a unique identifier (ID).
+
+Expected request and response formats##
+REST Endpoints:
+POST: /http://localhost:8080/api/flashcards
+
+request : { "question": "What is inheritance in Java?"
+    "answer": "Inheritance in Java is the method to create a hierarchy between classes by inheriting from other   classes. Java Inheritance is transitive.",
+   
+    }
+
+    response
+    { "id": 1,
+        "question": "What is inheritance in Java?"
+    "answer": "Inheritance in Java is the method to create a hierarchy between classes by inheriting from other   classes. Java Inheritance is transitive.",
+   
+    }
 
 ###Updating FlashCards####
 Narrative:
 Scenario: As a user, I want to update the content of a flashcard so that I can correct errors or improve its accuracy.
 
-Use Case: (through a client of this web API) enters the new question (“Word or Phrase”) and its coresponding new answer (“Definition or Translation”), and saves the flashcard.
+Use Case: (through a client of this web API) enters the new question (“Word or Phrase”) and its coresponding new answer (“Definition or Translation”), and saves the flashcard. An existing flashcard is updated.
 
 Acceptance Criteria:
 Accessing Flashcards:
@@ -39,6 +59,31 @@ The flashcard content is easily editable and well-formatted.
 Saving Changes:
 After making updates, I can save the modified flashcard.
 The changes are reflected in the flashcard list.
+
+REST Endpoints:
+PUT: /http://localhost:8080/api/flashcards/{id}
+
+request  : 
+ { 
+    "question": "What is polymorphism in Java?"
+        "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
+    
+   
+    }
+/made to an existing flashcard
+{ "id": 1
+    "question": "What is inheritance in Java?"
+    "answer": "Inheritance in Java is the method to create a hierarchy between classes by inheriting from other   classes. Java Inheritance is transitive.",
+   
+    }
+
+    response /an updated flashcard
+    { "id": 1,
+    "question": "What is polymorphism in Java?"
+        "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
+    
+   
+    }
 
 ###Retrieving FlashCards###
 Narrative:
@@ -63,6 +108,19 @@ Graceful Handling:
 Given an unexpected error occurs during retrieval (e.g., database connection issue),
 Then the app displays a generic error message (e.g., “An error occurred. Please try again later.”).
 And logs the error for debugging purposes.
+
+REST Endpoints:
+Get all Flashcards
+GET: /http://localhost:8080/api/flashcards
+{ "id": 1,
+    "question": "What is polymorphism in Java?"
+        "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
+    
+   
+    }
+    GET Flashcard by ID
+    REST Endpoints:
+GET:  /http://localhost:8080/api/flashcards/{id}
 
 ###Deleting FlashCards###
 Narrative:
@@ -92,8 +150,16 @@ Given an unexpected error occurs during deletion (e.g., database connection issu
 Then the app displays a generic error message (e.g., “An error occurred. Please try again later.”).
 And logs the error for debugging purposes.
 
+REST Endpoints:
+Delete all Flashcards
+DELETE: /http://localhost:8080/api/flashcards
+
+    Delete Flashcard by ID
+    REST Endpoints:
+DELETE:  /http://localhost:8080/api/flashcards/{id}
+
+
 ####REST Endpoints:###
-Create a REST controller with endpoints for CRUD operations:
 GET /flashcards: Retrieve all flashcards.
 GET /flashcards/{id}: Retrieve a specific flashcard by ID.
 POST /flashcards: Create a new flashcard.
