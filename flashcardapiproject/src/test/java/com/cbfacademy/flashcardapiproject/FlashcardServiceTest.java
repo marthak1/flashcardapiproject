@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import com.cbfacademy.flashcardapiproject.flashcard.Flashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.FlashcardRepository;
@@ -34,19 +35,17 @@ public class FlashcardServiceTest {
         assertEquals(mockFlashcard, result);
     }
 
-    /*
-     * @Test
-     * public void testGetFlashcardById() {
-     * Long id = 1L;
-     * Flashcard mockFlashcard = new Flashcard(1L, "John", "Doe");
-     * Mockito.when(flashcardRepository.findById(id)).thenReturn(Optional.of(
-     * mockFlashcard));
-     * 
-     * Optional<Flashcard> result = flashcardService.findFlashcardById(id);
-     * assertTrue(result.isPresent());
-     * assertEquals(mockFlashcard, result.get());
-     * }
-     */
+    @Test
+    public void testGetFlashcardById() throws NotFoundException {
+        Long id = 1L;
+        Flashcard mockFlashcard = new Flashcard(1L, "John", "Doe");
+        Mockito.when(flashcardRepository.findById(id)).thenReturn(Optional.of(
+                mockFlashcard));
+
+        Optional<Flashcard> result = Optional.ofNullable(flashcardService.getFlashcardById(id));
+        assertTrue(result.isPresent());
+        assertEquals(mockFlashcard, result.get());
+    }
 
     @Test
     public void testUpdateFlashcard() {
@@ -71,4 +70,5 @@ public class FlashcardServiceTest {
 
         Mockito.verify(flashcardRepository, Mockito.times(1)).deleteById(id);
     }
+
 }

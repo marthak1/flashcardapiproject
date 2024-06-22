@@ -9,11 +9,14 @@ Each flashcard will have;
 -and a corresponding answer
 
 
-###Creating The  FlashCard
-Narrative:
-Scenario: As a user, I want to create new flashcards by entering a question and its corresponding answer.
+# Creating The  FlashCard
 
-Use Case: (through a client of this web API)enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”), and saves the flashcard.
+# # Narrative:
+ Scenario: 
+As a user, I want to create new flashcards by entering a question and its corresponding answer.
+
+Use Case: 
+(through a client of this web API)enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”), and saves the flashcard.
 
 Acceptance criteria:
 Given: a user wants to create a new flashcard
@@ -39,8 +42,8 @@ request : { "question": "What is inheritance in Java?"
    
     }
 
-###Updating FlashCards####
-Narrative:
+# Updating FlashCards
+# # Narrative:
 Scenario: As a user, I want to update the content of a flashcard so that I can correct errors or improve its accuracy.
 
 Use Case: (through a client of this web API) enters the new question (“Word or Phrase”) and its coresponding new answer (“Definition or Translation”), and saves the flashcard. An existing flashcard is updated.
@@ -85,8 +88,8 @@ request  :
    
     }
 
-###Retrieving FlashCards###
-Narrative:
+# Retrieving FlashCards
+# #Narrative:
 Scenario: As a user, I want to retrieve a specific flashcard so that I can review its content .
 
 Use Case: (through a client of this web API) enters the question (“Word or Phrase”) and its coresponding answer (“Definition or Translation”),.
@@ -112,18 +115,20 @@ And logs the error for debugging purposes.
 REST Endpoints:
 Get all Flashcards
 GET: /http://localhost:8080/api/flashcards
+
 { "id": 1,
     "question": "What is polymorphism in Java?"
         "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
     
    
     }
+
     GET Flashcard by ID
     REST Endpoints:
 GET:  /http://localhost:8080/api/flashcards/{id}
 
-###Deleting FlashCards###
-Narrative:
+# Deleting FlashCards
+# #Narrative:
 Scenario: As a user, I want to be able to delete a flashcard that is no longer needed.
 
 Use Case: (through a client of this web API) enters the ID, confirms deletion and the flashcard permantely deleted.
@@ -140,33 +145,25 @@ When the action is completed,
 
 Then a record of the deletion (timestamp, user, flashcard ID) is stored for auditing purposes.
 
-Error Handling:
+# # Error Handling:
 Given a user attempts to delete a flashcard that doesn’t exist,
 When they click the delete button,
 Then an error message is displayed (e.g., “Flashcard not found”).
 
-Graceful Handling:
+# #Graceful Handling:
 Given an unexpected error occurs during deletion (e.g., database connection issue),
 Then the app displays a generic error message (e.g., “An error occurred. Please try again later.”).
 And logs the error for debugging purposes.
 
-REST Endpoints:
-Delete all Flashcards
-DELETE: /http://localhost:8080/api/flashcards
 
-    Delete Flashcard by ID
-    REST Endpoints:
-DELETE:  /http://localhost:8080/api/flashcards/{id}
-
-
-####REST Endpoints:###
+# # REST Endpoints:
 GET /flashcards: Retrieve all flashcards.
 GET /flashcards/{id}: Retrieve a specific flashcard by ID.
 POST /flashcards: Create a new flashcard.
 PUT /flashcards/{id}: Update an existing flashcard.
 DELETE /flashcards/{id}: Delete a flashcard.
 
-###TEST###
+# TEST
 Unit Testing The Service Methods
 
 Test Methods:

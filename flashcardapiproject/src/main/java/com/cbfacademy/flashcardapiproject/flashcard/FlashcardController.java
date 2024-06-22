@@ -33,7 +33,7 @@ public class FlashcardController {
         try {
             return flashcardService.getAllFlashcards();
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.OK, e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
 
@@ -52,7 +52,7 @@ public class FlashcardController {
         try {
             return flashcardService.updateFlashcard(id, updatedFlashcard);
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Flashcard Not Found", e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flashcard Not Found", e);
         }
 
     }
@@ -62,7 +62,7 @@ public class FlashcardController {
         try {
             flashcardService.deleteFlashcard(id);
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, e.getMessage(), e);
         }
     }
 }
