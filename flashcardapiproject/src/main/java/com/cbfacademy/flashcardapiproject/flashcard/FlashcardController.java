@@ -12,9 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping(path = "/api/flashcards")
 public class FlashcardController {
 
-    private final FlashcardService flashcardService;
+    private final IFlashcardService flashcardService;
 
-    public FlashcardController(FlashcardService flashcardService) {
+    public FlashcardController(IFlashcardService flashcardService) {
         this.flashcardService = flashcardService;
     }
 

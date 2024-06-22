@@ -8,7 +8,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FlashcardServiceImpl implements FlashcardService {
+public class FlashcardServiceImpl implements IFlashcardService {
 
     private FlashcardRepository flashcardRepository;
 

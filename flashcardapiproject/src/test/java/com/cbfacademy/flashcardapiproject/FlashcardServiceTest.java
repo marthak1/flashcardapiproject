@@ -9,7 +9,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import com.cbfacademy.flashcardapiproject.flashcard.Flashcard;
 import com.cbfacademy.flashcardapiproject.flashcard.FlashcardRepository;
-import com.cbfacademy.flashcardapiproject.flashcard.FlashcardService;
+import com.cbfacademy.flashcardapiproject.flashcard.IFlashcardService;
 
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.eq;
 public class FlashcardServiceTest {
 
     @Autowired
-    private FlashcardService flashcardService;
+    private IFlashcardService flashcardService;
 
     @MockBean
     private FlashcardRepository flashcardRepository;

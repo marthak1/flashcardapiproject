@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
-public interface FlashcardService {
+public interface IFlashcardService {
 
     // TextFlashcard HTTP
     Flashcard createFlashcard(Flashcard createdFlashcard);
