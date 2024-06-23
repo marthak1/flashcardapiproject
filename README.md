@@ -1,5 +1,7 @@
 # About This Project
 The purpose of this project is to build a (JSON over HTTP) API to manage flashcards, following a Behavioural-driven development approach.
+# # # Live deployment:
+ [CBF(Oladipo) Project Assessement](https://6677f2677ffbc46a4be23697--whimsical-lily-69e787.netlify.app/)
 
 # BDD requirement:
 # #  Title:
