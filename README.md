@@ -1,12 +1,14 @@
+# About This Project
 The purpose of this project is to build a (JSON over HTTP) API to manage flashcards, following a Behavioural-driven development approach.
 
-BDD requirement:
-Title:
+# BDD requirement:
+# #  Title:
 Basic functionality to create , edit, delete and retrieve flashcards.
 Each flashcard will have;
-- a unique identifier (ID).
--a question
--and a corresponding answer
+
+1. a unique identifier (ID).
+2. a question
+3. and a corresponding answer
 
 
 # Creating The  FlashCard
@@ -26,23 +28,29 @@ when: they enter a question and its corresponding answer,
 then: the flash card is saved sucessfully
 And the flashcard is assigned a unique identifier (ID).
 
-Expected request and response formats##
+# # # Expected request and response formats
 REST Endpoints:
 POST: /http://localhost:8080/api/flashcards
 
-request : { "question": "What is inheritance in Java?"
+```
+request : 
+{ 
+    "question": "What is inheritance in Java?"
     "answer": "Inheritance in Java is the method to create a hierarchy between classes by inheriting from other   classes. Java Inheritance is transitive.",
    
     }
 
-    response
-    { "id": 1,
+response
+    {
+         "id": 1,
         "question": "What is inheritance in Java?"
     "answer": "Inheritance in Java is the method to create a hierarchy between classes by inheriting from other   classes. Java Inheritance is transitive.",
    
     }
+```
 
 # Updating FlashCards
+
 # # Narrative:
 Scenario: As a user, I want to update the content of a flashcard so that I can correct errors or improve its accuracy.
 
@@ -63,10 +71,13 @@ Saving Changes:
 After making updates, I can save the modified flashcard.
 The changes are reflected in the flashcard list.
 
+# # # Expected request and response formats
 REST Endpoints:
 PUT: /http://localhost:8080/api/flashcards/{id}
 
+```
 request  : 
+
  { 
     "question": "What is polymorphism in Java?"
         "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
@@ -81,14 +92,19 @@ request  :
     }
 
     response /an updated flashcard
-    { "id": 1,
+    {
+
+    "id": 1,
     "question": "What is polymorphism in Java?"
         "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
     
    
     }
+```
+
 
 # Retrieving FlashCards
+
 # #Narrative:
 Scenario: As a user, I want to retrieve a specific flashcard so that I can review its content .
 
@@ -112,22 +128,27 @@ Given an unexpected error occurs during retrieval (e.g., database connection iss
 Then the app displays a generic error message (e.g., “An error occurred. Please try again later.”).
 And logs the error for debugging purposes.
 
+# # # Expected request and response formats
 REST Endpoints:
 Get all Flashcards
 GET: /http://localhost:8080/api/flashcards
-
-{ "id": 1,
+```
+{ 
+    "id": 1,
     "question": "What is polymorphism in Java?"
         "answer": "Polymorphism in Java is the task that performs a single action in different ways.",
     
    
     }
-
+```
     GET Flashcard by ID
     REST Endpoints:
 GET:  /http://localhost:8080/api/flashcards/{id}
 
+
+
 # Deleting FlashCards
+
 # #Narrative:
 Scenario: As a user, I want to be able to delete a flashcard that is no longer needed.
 
@@ -157,18 +178,20 @@ And logs the error for debugging purposes.
 
 
 # # REST Endpoints:
-GET /flashcards: Retrieve all flashcards.
-GET /flashcards/{id}: Retrieve a specific flashcard by ID.
-POST /flashcards: Create a new flashcard.
-PUT /flashcards/{id}: Update an existing flashcard.
-DELETE /flashcards/{id}: Delete a flashcard.
+- GET /flashcards: Retrieve all flashcards.
+- GET /flashcards/{id}: Retrieve a specific flashcard by ID.
+- POST /flashcards: Create a new flashcard.
+- PUT /flashcards/{id}: Update an existing flashcard.
+- DELETE /flashcards/{id}: Delete a flashcard.
 
 # TEST
 Unit Testing The Service Methods
 
-Test Methods:
+# #Test Methods:
 Write test methods to cover different scenarios:
-Test flashcard creation (HTTP POST request).
-Test flashcard retrieval (HTTP GET request).
-Test flashcard update (HTTP PUT request).
-Test error handling (e.g., invalid input, non-existent flashcard ID)
+- Test flashcard creation (HTTP POST request).
+- Test flashcard retrieval (HTTP GET request).
+- Test flashcard retrieval by id  (HTTP GET request/{id}).
+- Test flashcard update (HTTP PUT request).
+- Test Delete flashcard  (HTTP PUT request).
+
