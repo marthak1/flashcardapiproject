@@ -53,7 +53,7 @@ public class FlashcardController {
     @PutMapping("/{id}")
     public ResponseEntity<Flashcard> updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
         try {
-            // return flashcardService.updateFlashcard(id, updatedFlashcard);
+
             flashcardService.updateFlashcard(id, updatedFlashcard);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
