@@ -54,8 +54,8 @@ public class FlashcardController {
     public ResponseEntity<Flashcard> updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
         try {
             // return flashcardService.updateFlashcard(id, updatedFlashcard);
-            Flashcard flashcardUpdate = flashcardService.updateFlashcard(id, updatedFlashcard);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body((flashcardUpdate));
+            flashcardService.updateFlashcard(id, updatedFlashcard);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flashcard Not Found", e);
