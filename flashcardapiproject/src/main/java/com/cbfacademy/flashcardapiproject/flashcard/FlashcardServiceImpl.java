@@ -1,5 +1,6 @@
 package com.cbfacademy.flashcardapiproject.flashcard;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FlashcardServiceImpl implements IFlashcardService {
 
-    private FlashcardRepository flashcardRepository;
+    private FlashcardRepository flashcardRepository; // Inject flashcard repository
 
     public FlashcardServiceImpl(FlashcardRepository flashcardRepository) {
 
@@ -30,7 +31,22 @@ public class FlashcardServiceImpl implements IFlashcardService {
 
     @Override
     public List<Flashcard> getAllFlashcards() {
-        return flashcardRepository.findAll();
+        try {
+            List<Flashcard> flashcards = flashcardRepository.findAll();
+            shuffleFlashcards(flashcards);
+            return flashcards;
+        } catch (Exception e) {
+
+            throw new NoSuchElementException();
+        }
+    }
+
+    private void shuffleFlashcards(List<Flashcard> flashcards) {
+        int n = flashcards.size();
+        for (int i = n - 1; i > 0; i--) {
+            int j = (int) (Math.random() * (i + 1));
+            Collections.swap(flashcards, i, j);
+        }
     }
 
     @Override
