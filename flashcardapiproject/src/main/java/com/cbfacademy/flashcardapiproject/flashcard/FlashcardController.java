@@ -29,18 +29,21 @@ public class FlashcardController {
     }
 
     @GetMapping
-    public List<Flashcard> getAllFlashcards() {
+    public ResponseEntity<List<Flashcard>> getAllFlashcards() {
         try {
-            return flashcardService.getAllFlashcards();
+            List<Flashcard> flashcards = flashcardService.getAllFlashcards();
+            return ResponseEntity.status(HttpStatus.OK).body((flashcards));
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
 
     @GetMapping("/{id}")
-    public Flashcard getFlashcardByid(@PathVariable Long id) {
+    public ResponseEntity<Flashcard> getFlashcardByid(@PathVariable Long id) {
         try {
-            return flashcardService.getFlashcardById(id);
+            // return flashcardService.getFlashcardById(id);
+            Flashcard flashcard = flashcardService.getFlashcardById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(flashcard);
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "FlashCard Not Found", e);
         }
@@ -48,9 +51,12 @@ public class FlashcardController {
     }
 
     @PutMapping("/{id}")
-    public Flashcard updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
+    public ResponseEntity<Flashcard> updateFlashcard(@PathVariable Long id, @RequestBody Flashcard updatedFlashcard) {
         try {
-            return flashcardService.updateFlashcard(id, updatedFlashcard);
+            // return flashcardService.updateFlashcard(id, updatedFlashcard);
+            Flashcard flashcardUpdate = flashcardService.updateFlashcard(id, updatedFlashcard);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body((flashcardUpdate));
+
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flashcard Not Found", e);
         }
@@ -58,11 +64,12 @@ public class FlashcardController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFlashcard(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteFlashcard(@PathVariable Long id) {
         try {
             flashcardService.deleteFlashcard(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
 }
