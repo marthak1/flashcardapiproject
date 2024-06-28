@@ -1,5 +1,6 @@
 package com.cbfacademy.flashcardapiproject.flashcard;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -31,14 +32,9 @@ public class FlashcardServiceImpl implements IFlashcardService {
 
     @Override
     public List<Flashcard> getAllFlashcards() {
-        try {
-            List<Flashcard> flashcards = flashcardRepository.findAll();
-            shuffleFlashcards(flashcards);
-            return flashcards;
-        } catch (Exception e) {
-
-            throw new NoSuchElementException();
-        }
+        List<Flashcard> flashcards = new ArrayList<>(flashcardRepository.findAll());
+        shuffleFlashcards(flashcards);
+        return flashcards;
     }
 
     private void shuffleFlashcards(List<Flashcard> flashcards) {
