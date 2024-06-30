@@ -40,6 +40,7 @@ public class FlashcardServiceImpl implements IFlashcardService {
     private void shuffleFlashcards(List<Flashcard> flashcards) {
         int n = flashcards.size();
         for (int i = n - 1; i > 0; i--) {
+
             int j = (int) (Math.random() * (i + 1));
             Collections.swap(flashcards, i, j);
         }
@@ -59,10 +60,10 @@ public class FlashcardServiceImpl implements IFlashcardService {
     @Override
     public Flashcard updateFlashcard(Long id, Flashcard updatedFlashcard) throws NoSuchElementException {
         try {
-            Flashcard newFlashcard = flashcardRepository.findById(id).orElseThrow();
-            newFlashcard.setQuestion(updatedFlashcard.getQuestion());
-            newFlashcard.setAnswer(updatedFlashcard.getAnswer());
-            return flashcardRepository.save(newFlashcard);
+            Flashcard flashcard = flashcardRepository.findById(id).orElseThrow();
+            flashcard.setQuestion(updatedFlashcard.getQuestion());
+            flashcard.setAnswer(updatedFlashcard.getAnswer());
+            return flashcardRepository.save(flashcard);
 
         } catch (NoSuchElementException e) {
 
